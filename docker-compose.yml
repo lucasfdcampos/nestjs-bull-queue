@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  admin:
+    container_name: admin
+    build:
+      context: services/admin
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - $PWD/services/admin:/usr/src/app
+      - $PWD/services/admin/usr/src/app/node_modules
+      - $HOME/.cache/yarn:/yarncache
+    command: yarn start:dev
+    environment:
+      - CLIENT_URL=http://client:3010
+    ports:
+      - 3000:3000
+    
+  client:
+    container_name: client
+    build:
+      context: services/client
+      dockerfile: Dockerfile
+    volumes:
+      - $PWD/services/client:/usr/src/app
+      - $PWD/services/client/usr/src/app/node_modules
+      - $HOME/.cache/yarn:/yarncache
+    command: yarn start:dev
+    environment:
+      - CLIENT_URL=http://admin:3000
+    ports:
+      - 3010:3010
+  
+  
