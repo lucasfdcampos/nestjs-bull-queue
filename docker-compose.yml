@@ -13,7 +13,7 @@ services:
       - $HOME/.cache/yarn:/yarncache
     command: yarn start:dev
     environment:
-      - CLIENT_URL=http://client:3010
+      - CLIENT_SERVICE_URL=http://client:3010
     ports:
       - 3000:3000
     
@@ -28,7 +28,7 @@ services:
       - $HOME/.cache/yarn:/yarncache
     command: yarn start:dev
     environment:
-      - CLIENT_URL=http://admin:3000
+      - ADMIN_SERVICE_URL=http://admin:3000
     ports:
       - 3010:3010
   
